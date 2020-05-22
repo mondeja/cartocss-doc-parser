@@ -1,13 +1,13 @@
 # cartocss-doc-parser
 
-[![PyPI](https://img.shields.io/pypi/v/cartocss_doc_parser)](https://pypi.org/project/cartocss_doc_parser/) [![Tests](https://img.shields.io/travis/mondeja/cartocss-doc-parser?label=tests)](https://travis-ci.com/github/mondeja/cartocss-doc-parser) [![Coverage Status](https://coveralls.io/repos/github/mondeja/cartocss-doc-parser/badge.svg)](https://coveralls.io/github/mondeja/cartocss-doc-parser)
+[![PyPI](https://img.shields.io/pypi/v/cartocss-doc-parser)](https://pypi.org/project/cartocss-doc-parser/) [![Tests](https://img.shields.io/travis/mondeja/cartocss-doc-parser?label=tests)](https://travis-ci.com/github/mondeja/cartocss-doc-parser) [![Coverage Status](https://coveralls.io/repos/github/mondeja/cartocss-doc-parser/badge.svg)](https://coveralls.io/github/mondeja/cartocss-doc-parser)
 
-[CartoCSS documentation](https://carto.com/developers/styling/cartocss/) parser for Python.
+[CartoCSS documentation](https://carto.com/developers/styling/cartocss/) parser.
 
 ## Install
 
 ```bash
-pip install cartocss_doc_parser
+pip install cartocss-doc-parser
 ```
 
 ## Quickstart

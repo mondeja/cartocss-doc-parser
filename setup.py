@@ -9,8 +9,8 @@ from shutil import rmtree
 
 from setuptools import find_packages, setup, Command
 
-NAME = "cartocss_doc_parser"
-DESCRIPTION = "CartoCSS Python documentation parser."
+NAME = "cartocss-doc-parser"
+DESCRIPTION = "CartoCSS documentation parser."
 URL = "https://github.com/mondeja/cartocss-doc-parser"
 EMAIL = "mondejar1994@gmail.com"
 AUTHOR = "Álvaro Mondéjar Rubio"
@@ -27,7 +27,8 @@ with io.open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
     long_description = "\n" + f.read()
 
 ABOUT = {}
-with io.open(os.path.join(HERE, NAME, "__init__.py"), encoding="utf-8") as f:
+INIT_FILEPATH = os.path.join(HERE, "cartocss_doc_parser", "__init__.py")
+with io.open(INIT_FILEPATH, encoding="utf-8") as f:
     ABOUT["__version__"] = \
         re.search(r"__version__\s=\s[\"']([^\"']+)[\"']", f.read()).group(1)
 

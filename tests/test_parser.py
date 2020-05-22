@@ -4,50 +4,33 @@ import types
 
 import pytest
 
-from cartocss_doc_parser import (
-    cartocss_doc,
-    cartocss_data_types,
-    parse_symbolizers,
-    parse_values,
-    parse_other_parameters,
-    parse_torque_properties,
-    parse_common_elements,
-    parse_map_background_and_string_elements,
-    parse_polygon,
-    parse_line,
-    parse_markers,
-    parse_shield,
-    parse_line_pattern,
-    parse_polygon_pattern,
-    parse_raster,
-    parse_point,
-    parse_text,
-    parse_building,
-)
+import cartocss_doc_parser
 
 PARAMETRIC = [
-    (parse_symbolizers, 10, False),
-    (parse_values, 9, False),
-    (parse_other_parameters, 3, False),
-    (parse_torque_properties, 7, True),
-    (parse_common_elements, 3, True),
-    (parse_map_background_and_string_elements, 4, True),
-    (parse_polygon, 10, True),
-    (parse_line, 18, True),
-    (parse_markers, 21, True),
-    (parse_shield, 34, True),
-    (parse_line_pattern, 8, True),
-    (parse_polygon_pattern, 10, True),
-    (parse_raster, 9, True),
-    (parse_point, 7, True),
-    (parse_text, 34, True),
-    (parse_building, 3, True),
+    ("symbolizers", 10, False),
+    ("values", 9, False),
+    ("other_parameters", 3, False),
+    ("torque_properties", 7, True),
+    ("common_elements", 3, True),
+    ("map_background_and_string_elements", 4, True),
+    ("polygon", 10, True),
+    ("line", 18, True),
+    ("markers", 21, True),
+    ("shield", 34, True),
+    ("line_pattern", 8, True),
+    ("polygon_pattern", 10, True),
+    ("raster", 9, True),
+    ("point", 7, True),
+    ("text", 34, True),
+    ("building", 3, True),
 ]
 
 
 class TestParser:
+    @classmethod
     def setup_class(cls):
-        cls.carto_css_data_types = list(cartocss_data_types())
+        cls.carto_css_data_types = list(
+            cartocss_doc_parser.cartocss_data_types())
 
     def assert_link(self, url, contains=["#"]):
         self.assert_string(url)
@@ -114,14 +97,16 @@ class TestParser:
         self.assert_section_props(
             parser_func(soup), values=values, properties=properties)
 
-    @pytest.mark.parametrize("parser_func,values,properties", PARAMETRIC)
-    def test_parser(self, soup, parser_func, values, properties):
+    @pytest.mark.parametrize("parser,values,properties", PARAMETRIC)
+    def test_parser(self, soup, parser, values, properties):
         self.assert_parser(
-            soup, parser_func, values=values, properties=properties)
+            soup,
+            getattr(cartocss_doc_parser, "parse_%s" % parser),
+            values=values,
+            properties=properties)
 
     def test_cartocss_doc(self):
-        docs = cartocss_doc()
-        for parser_func, values, properties in PARAMETRIC:
-            attrname = parser_func.__name__.split("parse_")[-1]
+        docs = cartocss_doc_parser.cartocss_doc()
+        for attrname, values, properties in PARAMETRIC:
             self.assert_section_props(
                 docs[attrname], values=values, properties=properties)
