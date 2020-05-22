@@ -44,6 +44,7 @@ PARAMETRIC = [
     (parse_building, 3, True),
 ]
 
+
 class TestParser:
     def setup_class(cls):
         cls.carto_css_data_types = list(cartocss_data_types())
@@ -116,7 +117,8 @@ class TestParser:
 
     @pytest.mark.parametrize("parser_func,values,properties", PARAMETRIC)
     def test_parser(self, soup, parser_func, values, properties):
-        self.assert_parser(soup, parser_func, values=values, properties=properties)
+        self.assert_parser(
+            soup, parser_func, values=values, properties=properties)
 
     def test_cartocss_doc(self, soup):
         docs = cartocss_doc()
