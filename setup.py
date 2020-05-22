@@ -18,7 +18,7 @@ REQUIRES_PYTHON = '>=3.5'
 REQUIRED = ['requests', 'bs4', 'lxml']
 EXTRAS = {
     'dev': ['twine'],
-    'test': ['pytest', 'flake8', 'tox']
+    'test': ['pytest', 'pytest-cov', 'coveralls', 'flake8', 'tox']
 }
 
 HERE = os.path.abspath(os.path.dirname(__file__))
