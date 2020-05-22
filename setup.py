@@ -64,8 +64,8 @@ class UploadCommand(Command):
 
         self.status("Uploading the package to PyPI via Twine…")
         cmd = "twine upload%s dist/*" % (
-            " --repository-url https://test.pypi.org/legacy/" if self.test \
-                else ""
+            " --repository-url https://test.pypi.org/legacy/" if self.test
+            else ""
         )
         os.system(cmd)
         sys.exit()
