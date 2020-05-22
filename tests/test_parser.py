@@ -2,7 +2,10 @@
 
 import types
 
+import pytest
+
 from cartocss_doc_parser import (
+    cartocss_doc,
     cartocss_data_types,
     parse_symbolizers,
     parse_values,
@@ -22,6 +25,24 @@ from cartocss_doc_parser import (
     parse_building,
 )
 
+PARAMETRIC = [
+    (parse_symbolizers, 10, False),
+    (parse_values, 9, False),
+    (parse_other_parameters, 3, False),
+    (parse_torque_properties, 7, True),
+    (parse_common_elements, 3, True),
+    (parse_map_background_and_string_elements, 4, True),
+    (parse_polygon, 10, True),
+    (parse_line, 18, True),
+    (parse_markers, 21, True),
+    (parse_shield, 34, True),
+    (parse_line_pattern, 8, True),
+    (parse_polygon_pattern, 10, True),
+    (parse_raster, 9, True),
+    (parse_point, 7, True),
+    (parse_text, 34, True),
+    (parse_building, 3, True),
+]
 
 class TestParser:
     def setup_class(cls):
@@ -57,12 +78,7 @@ class TestParser:
         for item in value:
             self.assert_string(item)
 
-    def assert_table_links_after_h(self,
-                                   soup,
-                                   parser_func,
-                                   values=5,
-                                   properties=False):
-        _values = parser_func(soup)
+    def assert_section_props(self, _values, values=5, properties=False):
         assert isinstance(_values, types.GeneratorType)
         print()
 
@@ -94,66 +110,17 @@ class TestParser:
                     assert "variants" in _value
                     self.assert_variants(_value["variants"])
 
-    def test_symbolizers_markup(self, soup):
-        self.assert_table_links_after_h(soup, parse_symbolizers, values=10)
+    def assert_parser(self, soup, parser_func, values=5, properties=False):
+        self.assert_section_props(
+            parser_func(soup), values=values, properties=properties)
 
-    def test_values_markup(self, soup):
-        self.assert_table_links_after_h(soup, parse_values, values=9)
+    @pytest.mark.parametrize("parser_func,values,properties", PARAMETRIC)
+    def test_parser(self, soup, parser_func, values, properties):
+        self.assert_parser(soup, parser_func, values=values, properties=properties)
 
-    def test_other_parameters_markup(self, soup):
-        self.assert_table_links_after_h(soup, parse_other_parameters, values=3)
-
-    def test_torque_properties_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_torque_properties, values=7, properties=True)
-
-    def test_common_elements_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_common_elements, values=3, properties=True)
-
-    def test_map_background_and_string_elements_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup,
-            parse_map_background_and_string_elements,
-            values=4,
-            properties=True)
-
-    def test_polygon_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_polygon, values=10, properties=True)
-
-    def test_line_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_line, values=18, properties=True)
-
-    def test_markers_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_markers, values=21, properties=True)
-
-    def test_shield_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_shield, values=34, properties=True)
-
-    def test_line_pattern_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_line_pattern, values=8, properties=True)
-
-    def test_polygon_pattern_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_polygon_pattern, values=10, properties=True)
-
-    def test_raster_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_raster, values=9, properties=True)
-
-    def test_point_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_point, values=7, properties=True)
-
-    def test_text_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_text, values=34, properties=True)
-
-    def test_building_markup(self, soup):
-        self.assert_table_links_after_h(
-            soup, parse_building, values=3, properties=True)
+    def test_cartocss_doc(self, soup):
+        docs = cartocss_doc()
+        for parser_func, values, properties in PARAMETRIC:
+            attrname = parser_func.__name__.split("parse_")[-1]
+            self.assert_section_props(
+                docs[attrname], values=values, properties=properties)
