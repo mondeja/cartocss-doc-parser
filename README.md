@@ -89,14 +89,14 @@ and if the data type is `keyword` contains an additional attribute
 
 <a name="cartocss_doc" href="#cartocss_doc">#</a> <b>cartocss_doc</b>(<i>url="https://carto.com/developers/styling/cartocss/"</i>, <i>user_agent="cartocss_doc_parser vX.Y.Z"</i>) ⇒ `dict`
 
-Returns the complete information of almost every section of CartoCSS documentation.
+Provides information for almost every section of CartoCSS documentation.
 
 - **url** (str) URL to the documentation page. Can be a local file, in which case any HTTP request would be performed, instead the file would be read. 
 - **user_agent** (str) User agent performing the HTTP request to documentation page. As default is `cartocss_doc_parser (v%(version)s)`.
 
 <a name="cartocss_data_types" href="#cartocss_data_types">#</a> <b>cartocss_data_types</b>(<i>url="https://carto.com/developers/styling/cartocss/"</i>, <i>user_agent="cartocss_doc_parser vX.Y.Z"</i>) ⇒ `list`
 
-Returns all available data types for properties from CartoCSS documentation.
+Lists all available data types for properties for CartoCSS.
 
 - **url** (str) URL to the documentation page. Can be a local file, in which case any HTTP request would be performed, instead the file would be read. 
 - **user_agent** (str) User agent performing the HTTP request to documentation page. As default is `cartocss_doc_parser (v%(version)s)`.
