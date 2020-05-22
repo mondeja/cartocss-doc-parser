@@ -19,3 +19,5 @@ matrix:
       env: TOXENV=flake8
       dist: focal
 script: tox -v -- -v
+after_success:
+  - coveralls
