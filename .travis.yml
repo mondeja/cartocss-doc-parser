@@ -12,6 +12,10 @@ matrix:
     - python: 3.7
       env: TOXENV=py37
       dist: bionic
+      before_script:
+        - pip install coveralls
+      after_success:
+        - coveralls
     - python: 3.8-dev
       env: TOXENV=py38
       dist: focal
@@ -19,5 +23,3 @@ matrix:
       env: TOXENV=flake8
       dist: focal
 script: tox -v -- -v
-after_success:
-  - coveralls
