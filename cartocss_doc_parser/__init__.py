@@ -12,6 +12,7 @@ __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss_doc_parser"
 __author__ = "Álvaro Mondéjar Rubio"
 __description__ = "CartoCSS documentation parser."
+__module__ = sys.modules[__name__]
 
 CARTOCSS_DOC_URL = "https://carto.com/developers/styling/cartocss/"
 
@@ -163,18 +164,15 @@ def _create_parser(func_name, _id, properties):
 for _attrname, _id, properties in PARSERS:
     _func_name = "parse_%s" % _attrname
     setattr(
-        sys.modules[__name__],
-        _func_name,
-        _create_parser(_func_name, _id, properties))
+        __module__, _func_name, _create_parser(_func_name, _id, properties))
 
 
 def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     soup = get_cartocss_doc_soup(url=url, user_agent=user_agent)
-    mod = sys.modules[__name__]
     response = {}
     for _attrname, _id, _ in PARSERS:
         _func_name = "parse_%s" % _attrname
-        response[_attrname] = getattr(mod, _func_name)(soup, url=url)
+        response[_attrname] = getattr(__module__, _func_name)(soup, url=url)
     return response
 
 
