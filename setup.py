@@ -29,7 +29,7 @@ with io.open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
 ABOUT = {}
 with io.open(os.path.join(HERE, NAME, "__init__.py"), encoding="utf-8") as f:
     ABOUT["__version__"] = \
-        re.search(r"__version__\s=\s[\""]([^\"]+)[\""]", f.read()).group(1)
+        re.search(r"__version__\s=\s[\"']([^\"']+)[\"']", f.read()).group(1)
 
 
 class UploadCommand(Command):

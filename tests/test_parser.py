@@ -50,8 +50,7 @@ class TestParser:
         cls.carto_css_data_types = list(cartocss_data_types())
 
     def assert_link(self, url, contains=["#"]):
-        assert isinstance(url, str)
-        assert len(url) > 0
+        self.assert_string(url)
         for _string in contains:
             assert _string in url
 
@@ -120,7 +119,7 @@ class TestParser:
         self.assert_parser(
             soup, parser_func, values=values, properties=properties)
 
-    def test_cartocss_doc(self, soup):
+    def test_cartocss_doc(self):
         docs = cartocss_doc()
         for parser_func, values, properties in PARAMETRIC:
             attrname = parser_func.__name__.split("parse_")[-1]

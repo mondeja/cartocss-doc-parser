@@ -2,6 +2,7 @@
 
 import os
 import re
+import sys
 
 from bs4 import BeautifulSoup
 import requests
@@ -23,6 +24,26 @@ PROP_DETAILS_ATTR_MAP = {
 }
 
 UNDOCUMENTED_VALUES = ["keyword", "unsigned", "tags"]
+
+PARSERS = [
+    ("symbolizers", "cartocss-symbolizer", False),
+    ("values", "cartocss-values", False),
+    ("other_parameters", "other-cartocss-parameters", False),
+    ("torque_properties", "cartocss---torque-maps", True),
+    ("common_elements", "common-elements", True),
+    ("map_background_and_string_elements",
+     "map-background-and-string-elements", True),
+    ("polygon", "polygon", True),
+    ("line", "line", True),
+    ("markers", "markers", True),
+    ("shield", "shield", True),
+    ("line_pattern", "line-pattern", True),
+    ("polygon_pattern", "polygon-pattern", True),
+    ("raster", "raster", True),
+    ("point", "point", True),
+    ("text", "text", True),
+    ("building", "building", True),
+]
 
 
 def get_cartocss_doc_html(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
@@ -131,100 +152,30 @@ def cartocss_data_types(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         yield value
 
 
-def parse_symbolizers(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "cartocss-symbolizer", url=url)
+def _create_parser(func_name, _id, properties):
+    def _func(soup, url=CARTOCSS_DOC_URL):
+        return _parse_table_links_after_h(
+            soup, _id, url=url, properties=properties)
+    _func.__name__ = func_name
+    return _func
 
 
-def parse_values(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "cartocss-values", url=url)
-
-
-def parse_other_parameters(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "other-cartocss-parameters", url=url)
-
-
-def parse_torque_properties(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "cartocss---torque-maps", url=url, properties=True)
-
-
-def parse_common_elements(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "common-elements", url=url, properties=True)
-
-
-def parse_map_background_and_string_elements(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "map-background-and-string-elements", url=url, properties=True)
-
-
-def parse_polygon(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "polygon", url=url, properties=True)
-
-
-def parse_line(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "line", url=url, properties=True)
-
-
-def parse_markers(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "markers", url=url, properties=True)
-
-
-def parse_shield(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "shield", url=url, properties=True)
-
-
-def parse_line_pattern(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "line-pattern", url=url, properties=True)
-
-
-def parse_polygon_pattern(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "polygon-pattern", url=url, properties=True)
-
-
-def parse_raster(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "raster", url=url, properties=True)
-
-
-def parse_point(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "point", url=url, properties=True)
-
-
-def parse_text(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "text", url=url, properties=True)
-
-
-def parse_building(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(
-        soup, "building", url=url, properties=True)
+for _attrname, _id, properties in PARSERS:
+    _func_name = "parse_%s" % _attrname
+    setattr(
+        sys.modules[__name__],
+        _func_name,
+        _create_parser(_func_name, _id, properties))
 
 
 def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     soup = get_cartocss_doc_soup(url=url, user_agent=user_agent)
-    return {
-        "symbolizers": parse_symbolizers(soup, url=url),
-        "values": parse_values(soup, url=url),
-        "other_parameters": parse_other_parameters(soup, url=url),
-        "torque_properties": parse_torque_properties(soup, url=url),
-        "common_elements": parse_common_elements(soup, url=url),
-        "map_background_and_string_elements":
-            parse_map_background_and_string_elements(soup, url=url),
-        "polygon": parse_polygon(soup, url=url),
-        "line": parse_line(soup, url=url),
-        "markers": parse_markers(soup, url=url),
-        "shield": parse_shield(soup, url=url),
-        "line_pattern": parse_line_pattern(soup, url=url),
-        "polygon_pattern": parse_polygon_pattern(soup, url=url),
-        "raster": parse_raster(soup, url=url),
-        "point": parse_point(soup, url=url),
-        "text": parse_text(soup, url=url),
-        "building": parse_building(soup, url=url),
-    }
+    mod = sys.modules[__name__]
+    response = {}
+    for _attrname, _id, _ in PARSERS:
+        _func_name = "parse_%s" % _attrname
+        response[_attrname] = getattr(mod, _func_name)(soup, url=url)
+    return response
 
 
 if __name__ == "__main__":
