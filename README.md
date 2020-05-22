@@ -1,5 +1,7 @@
 # cartocss-doc-parser
 
+[![Tests](https://img.shields.io/travis/mondeja/cartocss-doc-parser?label=tests)](https://travis-ci.com/github/mondeja/cartocss-doc-parser)
+
 [CartoCSS documentation](https://carto.com/developers/styling/cartocss/) parser for Python.
 
 ## Install

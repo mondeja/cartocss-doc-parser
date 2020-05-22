@@ -93,7 +93,6 @@ class TestParser:
                 if _value["type"] == "keyword":
                     assert "variants" in _value
                     self.assert_variants(_value["variants"])
-        print()
 
     def test_symbolizers_markup(self, soup):
         self.assert_table_links_after_h(soup, parse_symbolizers, values=10)
