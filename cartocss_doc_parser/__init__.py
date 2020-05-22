@@ -7,7 +7,7 @@ import sys
 from bs4 import BeautifulSoup
 import requests
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss_doc_parser"
 __author__ = "Álvaro Mondéjar Rubio"

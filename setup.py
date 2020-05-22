@@ -36,7 +36,9 @@ class UploadCommand(Command):
     """Support setup.py upload."""
 
     description = "Build and publish the package."
-    user_options = []
+    user_options = [
+        ("test", None, "Specify if you want to test your upload to Pypi."),
+    ]
 
     @staticmethod
     def status(s):
@@ -44,7 +46,7 @@ class UploadCommand(Command):
         print("\033[1m{0}\033[0m".format(s))
 
     def initialize_options(self):
-        pass
+        self.test = None
 
     def finalize_options(self):
         pass
@@ -61,12 +63,11 @@ class UploadCommand(Command):
             sys.executable))
 
         self.status("Uploading the package to PyPI via Twine…")
-        os.system("twine upload dist/*")
-
-        self.status("Pushing git tags…")
-        os.system("git tag v{0}".format(ABOUT["__version__"]))
-        os.system("git push --tags")
-
+        cmd = "twine upload%s dist/*" % (
+            " --repository-url https://test.pypi.org/legacy/" if self.test \
+                else ""
+        )
+        os.system(cmd)
         sys.exit()
 
 
