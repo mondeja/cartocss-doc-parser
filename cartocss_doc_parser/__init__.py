@@ -6,15 +6,15 @@ import re
 from bs4 import BeautifulSoup
 import requests
 
-__version__ = '0.0.1'
-__version_info__ = tuple([int(i) for i in __version__.split('.')])
-__title__ = 'cartocss_doc_parser'
-__author__ = 'Álvaro Mondéjar Rubio'
-__description__ = 'CartoCSS documentation parser.'
+__version__ = "0.0.1"
+__version_info__ = tuple([int(i) for i in __version__.split(".")])
+__title__ = "cartocss_doc_parser"
+__author__ = "Álvaro Mondéjar Rubio"
+__description__ = "CartoCSS documentation parser."
 
-CARTOCSS_DOC_URL = 'https://carto.com/developers/styling/cartocss/'
+CARTOCSS_DOC_URL = "https://carto.com/developers/styling/cartocss/"
 
-DEFAULT_USER_AGENT = '%s v%s' % (__title__, __version__)
+DEFAULT_USER_AGENT = "%s v%s" % (__title__, __version__)
 
 PROP_DETAILS_ATTR_MAP = {
     "Description": "description",
@@ -30,12 +30,12 @@ def get_cartocss_doc_html(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         with open(url, encoding="utf-8") as f:
             markup = f.read()
         return markup
-    return requests.get(url, headers={'User-Agent': user_agent}).text
+    return requests.get(url, headers={"User-Agent": user_agent}).text
 
 
 def get_cartocss_doc_soup(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     markup = get_cartocss_doc_html(url=url, user_agent=user_agent)
-    return BeautifulSoup(markup, 'lxml')
+    return BeautifulSoup(markup, "lxml")
 
 
 def _parse_table_links_after_h(soup,
@@ -50,10 +50,10 @@ def _parse_table_links_after_h(soup,
         a = td.find("a", recursive=False)
         if a is None:
             break
-        _id = a['href'].strip("#")
+        _id = a["href"].strip("#")
         prop = {
             "name": str(a.string),
-            "link": url + a['href'],
+            "link": url + a["href"],
             "id": _id,
         }
         if properties:
@@ -88,7 +88,7 @@ def _parse_table_links_after_h(soup,
 
                         if code_container is None:
                             default = re.search(
-                                r'^([^.,]+)', prop_td.get_text().lower()
+                                r"^([^.,]+)", prop_td.get_text().lower()
                             ).group(1)
                             if " (" in default:
                                 default = default.split(" (")[0]

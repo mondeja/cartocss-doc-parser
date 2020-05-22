@@ -24,7 +24,7 @@ def before_start():
             f.write(get_cartocss_doc_html())
 
 
-@pytest.fixture(autouse=True, scope='session')
+@pytest.fixture(autouse=True, scope="session")
 def setup():
     before_start()
     yield
