@@ -22,6 +22,7 @@ from cartocss_doc_parser import (
     parse_building,
 )
 
+
 class TestParser:
     def setup_class(cls):
         cls.carto_css_data_types = list(cartocss_data_types())

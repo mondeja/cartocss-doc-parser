@@ -24,6 +24,7 @@ PROP_DETAILS_ATTR_MAP = {
 
 UNDOCUMENTED_VALUES = ["keyword", "unsigned", "tags"]
 
+
 def get_cartocss_doc_html(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     if os.path.isfile(url):
         with open(url, encoding="utf-8") as f:
@@ -118,6 +119,7 @@ def _parse_table_links_after_h(soup,
             prop.update(prop_details)
         yield prop
 
+
 def cartocss_data_types(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     soup = get_cartocss_doc_soup(url=url, user_agent=user_agent)
     for value in _parse_table_links_after_h(soup, "cartocss-values", url=url):
@@ -128,60 +130,79 @@ def cartocss_data_types(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     for value in UNDOCUMENTED_VALUES:
         yield value
 
+
 def parse_symbolizers(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "cartocss-symbolizer", url=url)
 
+
 def parse_values(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "cartocss-values", url=url)
+
 
 def parse_other_parameters(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "other-cartocss-parameters", url=url)
 
+
 def parse_torque_properties(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "cartocss---torque-maps", url=url, properties=True)
+
 
 def parse_common_elements(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "common-elements", url=url, properties=True)
 
+
 def parse_map_background_and_string_elements(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "map-background-and-string-elements", url=url, properties=True)
 
+
 def parse_polygon(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "polygon", url=url, properties=True)
+    return _parse_table_links_after_h(
+        soup, "polygon", url=url, properties=True)
+
 
 def parse_line(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "line", url=url, properties=True)
 
+
 def parse_markers(soup, url=CARTOCSS_DOC_URL):
-    return _parse_table_links_after_h(soup, "markers", url=url, properties=True)
+    return _parse_table_links_after_h(
+        soup, "markers", url=url, properties=True)
+
 
 def parse_shield(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "shield", url=url, properties=True)
+
 
 def parse_line_pattern(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "line-pattern", url=url, properties=True)
 
+
 def parse_polygon_pattern(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "polygon-pattern", url=url, properties=True)
 
+
 def parse_raster(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "raster", url=url, properties=True)
+
 
 def parse_point(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "point", url=url, properties=True)
 
+
 def parse_text(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(soup, "text", url=url, properties=True)
+
 
 def parse_building(soup, url=CARTOCSS_DOC_URL):
     return _parse_table_links_after_h(
         soup, "building", url=url, properties=True)
+
 
 def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     soup = get_cartocss_doc_soup(url=url, user_agent=user_agent)
@@ -191,7 +212,7 @@ def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         "other_parameters": parse_other_parameters(soup, url=url),
         "torque_properties": parse_torque_properties(soup, url=url),
         "common_elements": parse_common_elements(soup, url=url),
-        "map_background_and_string_elements": \
+        "map_background_and_string_elements":
             parse_map_background_and_string_elements(soup, url=url),
         "polygon": parse_polygon(soup, url=url),
         "line": parse_line(soup, url=url),
@@ -204,6 +225,7 @@ def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         "text": parse_text(soup, url=url),
         "building": parse_building(soup, url=url),
     }
+
 
 if __name__ == "__main__":
     from pprint import pprint
