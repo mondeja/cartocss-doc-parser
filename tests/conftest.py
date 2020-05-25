@@ -33,3 +33,8 @@ def setup():
 @pytest.fixture
 def soup():
     yield get_cartocss_doc_soup(url=TEST_MARKUP_FILEPATH)
+
+
+@pytest.fixture
+def html():
+    yield get_cartocss_doc_html(url=TEST_MARKUP_FILEPATH)
