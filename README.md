@@ -12,7 +12,7 @@ pip install cartocss-doc-parser
 
 ## Quickstart
 
-The main function `cartocss_doc` returns a dictionary with almost every section of the documentation. All the properties are wrapped in generators.
+The main function [cartocss_doc](#cartocss_doc) returns a dictionary with almost every section of the documentation. All the properties are wrapped in generators.
 
 ```python
 > from pprint import pprint
@@ -85,6 +85,28 @@ and if the data type is `keyword` contains an additional attribute
 ]
 ```
 
+All data types can be requested with [cartocss_data_types](#cartocss_data_types) function:
+
+```python
+> from cartocss_doc_parser import cartocss_data_types
+> pprint(list(cartocss_data_types()))
+['color',
+ 'float',
+ 'uri',
+ 'string',
+ 'boolean',
+ 'expression',
+ 'numbers',
+ 'number',
+ 'percentages',
+ 'percentage',
+ 'functions',
+ 'function',
+ 'keyword',
+ 'unsigned',
+ 'tags']
+```
+
 ## Documentation
 
 <a name="cartocss_doc" href="#cartocss_doc">#</a> <b>cartocss_doc</b>(<i>url="https://carto.com/developers/styling/cartocss/"</i>, <i>user_agent="cartocss_doc_parser vX.Y.Z"</i>) ⇒ `dict`
@@ -94,7 +116,7 @@ Provides information for almost every section of CartoCSS documentation.
 - **url** (str) URL to the documentation page. Can be a local file, in which case any HTTP request would be performed, instead the file would be read. 
 - **user_agent** (str) User agent performing the HTTP request to documentation page. As default is `cartocss_doc_parser (v%(version)s)`.
 
-<a name="cartocss_data_types" href="#cartocss_data_types">#</a> <b>cartocss_data_types</b>(<i>url="https://carto.com/developers/styling/cartocss/"</i>, <i>user_agent="cartocss_doc_parser vX.Y.Z"</i>) ⇒ `list`
+<a name="cartocss_data_types" href="#cartocss_data_types">#</a> <b>cartocss_data_types</b>(<i>url="https://carto.com/developers/styling/cartocss/"</i>, <i>user_agent="cartocss_doc_parser vX.Y.Z"</i>) ⇒ `gen`
 
 Lists all available data types for properties for CartoCSS.
 
