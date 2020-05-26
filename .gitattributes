@@ -1,0 +1,2 @@
+* text=auto
+tests/expected-markup.html -diff
