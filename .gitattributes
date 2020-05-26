@@ -1,2 +1,1 @@
-* text=auto
-tests/expected-markup.html -diff
+tests/*.html -diff linguist-generated
