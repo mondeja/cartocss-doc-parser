@@ -74,7 +74,9 @@ def _parse_table_links_after_h(soup,
             break
         _id = a["href"].strip("#")
         prop = {
-            "name": str(a.string),
+            # Split because error in opacity property
+            # https://carto.com/developers/styling/cartocss/#common-elements
+            "name": str(a.string).split(" ")[0],
             "link": url + a["href"],
             "id": _id,
         }
