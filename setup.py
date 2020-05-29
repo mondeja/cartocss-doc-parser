@@ -9,8 +9,6 @@ from shutil import rmtree
 
 from setuptools import find_packages, setup, Command
 
-NAME = "cartocss-doc-parser"
-DESCRIPTION = "CartoCSS documentation parser."
 URL = "https://github.com/mondeja/cartocss-doc-parser"
 EMAIL = "mondejar1994@gmail.com"
 AUTHOR = "Álvaro Mondéjar Rubio"
@@ -24,13 +22,18 @@ EXTRAS = {
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 with io.open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
-    long_description = "\n" + f.read()
+    LONG_DESCRIPTION = "\n" + f.read()
 
 ABOUT = {}
 INIT_FILEPATH = os.path.join(HERE, "cartocss_doc_parser", "__init__.py")
 with io.open(INIT_FILEPATH, encoding="utf-8") as f:
+    content = f.read()
+    ABOUT["__title__"] = \
+        re.search(r"__title__\s=\s[\"']([^\"']+)[\"']", content).group(1)
     ABOUT["__version__"] = \
-        re.search(r"__version__\s=\s[\"']([^\"']+)[\"']", f.read()).group(1)
+        re.search(r"__version__\s=\s[\"']([^\"']+)[\"']", content).group(1)
+    ABOUT["__description__"] = \
+        re.search(r"__description__\s=\s[\"']([^\"']+)[\"']", content).group(1)
 
 
 class UploadCommand(Command):
@@ -73,10 +76,10 @@ class UploadCommand(Command):
 
 
 setup(
-    name=NAME,
+    name=ABOUT["__title__"],
     version=ABOUT["__version__"],
-    description=DESCRIPTION,
-    long_description=long_description,
+    description=ABOUT["__version__"],
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author=AUTHOR,
     author_email=EMAIL,
