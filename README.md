@@ -15,11 +15,11 @@ pip install cartocss-doc-parser
 The main function [cartocss_doc](#cartocss_doc) returns a dictionary with almost every section of the documentation. All the properties are wrapped in generators.
 
 ```python
-> from pprint import pprint
-> from cartocss_doc_parser import cartocss_doc
->
-> doc = cartocss_doc()
-> pprint(doc)
+>>> from pprint import pprint
+>>> from cartocss_doc_parser import cartocss_doc
+>>>
+>>> doc = cartocss_doc()
+>>> pprint(doc)
 {'building': <generator object ...>,
  'common_elements': <generator object ...>,
  'line': <generator object ...>,
@@ -53,7 +53,7 @@ and if the data type is `keyword` contains an additional attribute
 - **`variants`** Possible values for the property.
 
 ```python
-> pprint(list(doc["polygon"]))
+>>> pprint(list(doc["polygon"]))
 [{'default': 'gray',
   'description': 'The fill color assigned to a polygon.',
   'id': 'polygon-fill-color',
@@ -88,8 +88,8 @@ and if the data type is `keyword` contains an additional attribute
 All data types can be requested with [cartocss_data_types](#cartocss_data_types) function:
 
 ```python
-> from cartocss_doc_parser import cartocss_data_types
-> pprint(list(cartocss_data_types()))
+>>> from cartocss_doc_parser import cartocss_data_types
+>>> pprint(list(cartocss_data_types()))
 ['color',
  'float',
  'uri',

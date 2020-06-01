@@ -7,7 +7,7 @@ import sys
 from bs4 import BeautifulSoup
 import requests
 
-__version__ = "0.0.9"
+__version__ = "0.0.10"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss-doc-parser"
 __description__ = "CartoCSS documentation parser."
@@ -175,8 +175,3 @@ def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         _func_name = "parse_%s" % _attrname
         response[_attrname] = getattr(__module__, _func_name)(soup, url=url)
     return response
-
-
-if __name__ == "__main__":
-    from pprint import pprint
-    pprint(cartocss_doc())
