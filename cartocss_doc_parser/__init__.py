@@ -7,7 +7,7 @@ import sys
 from bs4 import BeautifulSoup
 import requests
 
-__version__ = "0.0.10"
+__version__ = "0.1.0"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss-doc-parser"
 __description__ = "CartoCSS documentation parser."
@@ -117,6 +117,13 @@ def _parse_table_links_after_h(soup,
                                 default = default.split(" (")[0]
                         else:
                             default = code_container.string.lower()
+                        # The property `background-image` has next string as
+                        # default value, but must be null instead
+                        # carto.com/developers/styling/cartocss/#background-image-uri
+                        _invalid_value = \
+                            "this parameter is not applied by default"
+                        if default == _invalid_value:
+                            default = None
                         prop_details[_current_prop_detail] = default
                     elif _current_prop_detail == "variants":
 

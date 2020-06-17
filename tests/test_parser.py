@@ -59,7 +59,10 @@ class TestParser:
         self.assert_string(value)
 
     def assert_default(self, value):
+        if value is None:
+            return
         self.assert_string(value)
+        assert value != "this parameter is not applied by default"
 
     def assert_variants(self, value):
         assert isinstance(value, list)
