@@ -1,6 +1,6 @@
 # cartocss-doc-parser
 
-[![PyPI](https://img.shields.io/pypi/v/cartocss-doc-parser)](https://pypi.org/project/cartocss-doc-parser/) [![Tests](https://img.shields.io/travis/mondeja/cartocss-doc-parser?label=tests)](https://travis-ci.com/github/mondeja/cartocss-doc-parser) [![Coverage Status](https://coveralls.io/repos/github/mondeja/cartocss-doc-parser/badge.svg)](https://coveralls.io/github/mondeja/cartocss-doc-parser)
+[![PyPI](https://img.shields.io/pypi/v/cartocss-doc-parser)](https://pypi.org/project/cartocss-doc-parser/) [![PyPI versions](https://img.shields.io/pypi/pyversions/cartocss-doc-parser)](https://pypi.org/project/cartocss-doc-parser/) [![Tests](https://img.shields.io/travis/mondeja/cartocss-doc-parser?label=tests)](https://travis-ci.com/github/mondeja/cartocss-doc-parser) [![Coverage Status](https://coveralls.io/repos/github/mondeja/cartocss-doc-parser/badge.svg)](https://coveralls.io/github/mondeja/cartocss-doc-parser)
 
 [CartoCSS documentation](https://carto.com/developers/styling/cartocss/) parser.
 
