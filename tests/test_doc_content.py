@@ -19,6 +19,6 @@ def test_doc_content_diff(html):
     for i, (line, expected_line) in line_iterator:
         msg_schema = "Difference in line number %d.\nEXPECTED: %s\nFOUND: %s"
 
-        l, el = (line.strip(" ").strip("\t"),
-                 expected_line.strip(" ").strip("\t"))
-        assert l == el, msg_schema % (i+1, expected_line, line)
+        _line, _el = (line.strip(" ").strip("\t"),
+                      expected_line.strip(" ").strip("\t"))
+        assert _line == _el, msg_schema % (i+1, expected_line, line)
