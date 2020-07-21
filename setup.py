@@ -13,7 +13,7 @@ URL = "https://github.com/mondeja/cartocss-doc-parser"
 EMAIL = "mondejar1994@gmail.com"
 AUTHOR = "Álvaro Mondéjar Rubio"
 REQUIRES_PYTHON = ">=3.5"
-REQUIRED = ["requests", "bs4", "lxml"]
+REQUIRED = ["bs4", "lxml"]
 EXTRAS = {
     "dev": ["twine"],
     "test": ["pytest", "pytest-cov", "flake8", "tox"]

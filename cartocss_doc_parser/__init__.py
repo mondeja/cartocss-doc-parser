@@ -3,11 +3,14 @@
 import os
 import re
 import sys
+try:
+    from urllib.request import Request, urlopen
+except ImportError:
+    from urllib2 import Request, urlopen
 
 from bs4 import BeautifulSoup
-import requests
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss-doc-parser"
 __description__ = "CartoCSS documentation parser."
@@ -51,7 +54,9 @@ def get_cartocss_doc_html(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
         with open(url, encoding="utf-8") as f:
             markup = f.read()
         return markup
-    return requests.get(url, headers={"User-Agent": user_agent}).text
+    req = Request(url)
+    req.add_header("User-Agent", user_agent)
+    return urlopen(req).read().decode("utf-8")
 
 
 def get_cartocss_doc_soup(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
