@@ -3,14 +3,11 @@
 import os
 import re
 import sys
-try:
-    from urllib.request import Request, urlopen
-except ImportError:
-    from urllib2 import Request, urlopen
+from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss-doc-parser"
 __description__ = "CartoCSS documentation parser."
