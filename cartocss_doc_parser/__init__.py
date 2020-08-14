@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import os
 import re
 import sys
@@ -7,7 +5,7 @@ from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
 
-__version__ = "0.2.2"
+__version__ = "0.2.3"
 __version_info__ = tuple([int(i) for i in __version__.split(".")])
 __title__ = "cartocss-doc-parser"
 __description__ = "CartoCSS documentation parser."
@@ -75,7 +73,7 @@ def _parse_table_links_after_h(soup,
             break
         _id = a["href"].strip("#")
         prop = {
-            # Split because error in opacity property
+            # Split due to error in `opacity` property
             # https://carto.com/developers/styling/cartocss/#common-elements
             "name": str(a.string).split(" ")[0],
             "link": url + a["href"],
@@ -85,7 +83,7 @@ def _parse_table_links_after_h(soup,
             prop_h = soup.find(id=_id)
             data_type_container = prop_h.find_next()
 
-            # Error in property title:
+            # Error in `property` title:
             # https://carto.com/developers/styling/cartocss/#point-comp-op-keyword
             if prop_h.string is not None and "`" in prop_h.string:
                 prop["type"] = prop_h.string.split("`")[-1]
