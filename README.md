@@ -4,6 +4,10 @@
 
 [CartoCSS documentation](https://carto.com/developers/styling/cartocss/) parser.
 
+<p align="center">
+  <img width="512" height="512" src="https://raw.githubusercontent.com/mondeja/cartocss-doc-parser/master/cartocss-doc-parsed.png">
+</p>
+
 ## Install
 
 ```bash
