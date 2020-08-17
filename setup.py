@@ -14,9 +14,10 @@ EMAIL = "mondejar1994@gmail.com"
 AUTHOR = "Álvaro Mondéjar Rubio"
 REQUIRES_PYTHON = ">=3.5"
 REQUIRED = ["bs4", "lxml"]
+TEST_EXTRAS = ["pytest", "pytest-cov", "flake8", "tox"]
 EXTRAS = {
-    "dev": ["twine"],
-    "test": ["pytest", "pytest-cov", "flake8", "tox"]
+    "dev": ["twine"] + TEST_EXTRAS,
+    "test": TEST_EXTRAS,
 }
 
 HERE = os.path.abspath(os.path.dirname(__file__))
