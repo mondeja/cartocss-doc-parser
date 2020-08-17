@@ -16,7 +16,7 @@ REQUIRES_PYTHON = ">=3.5"
 REQUIRED = ["bs4", "lxml"]
 TEST_EXTRAS = ["pytest", "pytest-cov", "flake8", "tox"]
 EXTRAS = {
-    "dev": ["twine"] + TEST_EXTRAS,
+    "dev": ["twine", "bump2version"] + TEST_EXTRAS,
     "test": TEST_EXTRAS,
 }
 
