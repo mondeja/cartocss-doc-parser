@@ -1,24 +1,36 @@
 # -*- coding: utf-8 -*-
 
-import os
-import hashlib
+import pytest
 
 
-def test_doc_content_md5(html):
-    hash_md5 = hashlib.md5(html.encode("utf-8"))
-    assert hash_md5.hexdigest() == "60b7b01ab44061426aef0c695a689b33"
+class TestDocContent:
+    """These tests have been added to check the resolution of
+    CartoCSS documentation errors reported to Carto developer team.
+    More information at https://github.com/mondeja/cartocss-doc-parser/issues/1
 
+    If one of the next test fails, means that errors in CartoCSS documentation
+    has been solved and the source code of this library must be updated.
+    """
+    def test_opacity_common_elements_section(self, soup):
+        section_table = soup.find(id='common-elements').find_next()
+        while section_table.name != "table":
+            section_table = section_table.find_next()
+        link = section_table.find_all('td')[2].find('a')
+        assert link.text == "opacity float"
 
-def test_doc_content_diff(html):
-    markup_lines = html.splitlines()
+    def test_point_comp_op_point_section(self, soup):
+        point_comp_op_keyword_h = soup.find(id='point-comp-op-keyword')
+        assert point_comp_op_keyword_h.text == "point-comp-op `keyword"
 
-    with open(os.path.join("tests", "expected-markup.html")) as f:
-        expected_markup_lines = f.read().splitlines()
+    def test_torque_aggregation_function_link(self, soup):
+        table = soup.find(id="torque-cartocss-properties").find_next()
+        #link = table.find_all("td")
+        link = table.find_all("td")[3].find("a")
+        assert link.attrs['href'] == "{#-torque-aggregation-function-keyword"
 
-    line_iterator = enumerate(zip(markup_lines, expected_markup_lines))
-    for i, (line, expected_line) in line_iterator:
-        msg_schema = "Difference in line number %d.\nEXPECTED: %s\nFOUND: %s"
-
-        _line, _el = (line.strip(" ").strip("\t"),
-                      expected_line.strip(" ").strip("\t"))
-        assert _line == _el, msg_schema % (i+1, expected_line, line)
+    def test_torque_aggregation_function_table_available_values(self, soup):
+        table = soup.find(id="-torque-aggregation-function-keyword").find_next()
+        while table.name != "table":
+            table = table.find_next()
+        td = table.find_all("tr")[3].find_all("td")[1]
+        assert len(td.find_all("code")) == 1
