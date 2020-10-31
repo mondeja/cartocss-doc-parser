@@ -6,20 +6,16 @@ install:
   - travis_retry pip install -U tox-travis
 matrix:
   include:
-    - python: 3.6
-      env: TOXENV=py36
-      dist: xenial
     - python: 3.7
       env: TOXENV=coveralls
-      dist: bionic
       before_script:
         - pip install coveralls
       after_success:
         - coveralls
     - python: 3.8
       env: TOXENV=py38
-      dist: focal
     - python: 3.7
       env: TOXENV=flake8
-      dist: focal
+    - python: 3.9
+      env: TOXENV=py39
 script: tox -v -- -v
