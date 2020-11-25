@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import types
 
 import pytest
@@ -76,7 +77,7 @@ class TestParser:
                              values=5,
                              properties=False):
         assert isinstance(_values, types.GeneratorType)
-        print()
+        sys.stdout.write("\n")
 
         _values = list(_values)
         assert len(_values) == values
@@ -93,7 +94,7 @@ class TestParser:
 
             assert "id" in _value
             self.assert_id(_value["id"])
-            print("#" + _value["id"])
+            sys.stdout.write("#%s\n" % _value["id"])
 
             if properties:
                 assert "type" in _value

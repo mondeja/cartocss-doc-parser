@@ -18,4 +18,4 @@ matrix:
       env: TOXENV=flake8
     - python: 3.9
       env: TOXENV=py39
-script: tox -v -- -v
+script: tox -- -v

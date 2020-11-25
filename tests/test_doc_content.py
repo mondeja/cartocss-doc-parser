@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import pytest
-
-
 class TestDocContent:
     """These tests have been added to check the resolution of
     CartoCSS documentation errors reported to Carto developer team.
@@ -24,12 +21,12 @@ class TestDocContent:
 
     def test_torque_aggregation_function_link(self, soup):
         table = soup.find(id="torque-cartocss-properties").find_next()
-        #link = table.find_all("td")
         link = table.find_all("td")[3].find("a")
         assert link.attrs['href'] == "{#-torque-aggregation-function-keyword"
 
     def test_torque_aggregation_function_table_available_values(self, soup):
-        table = soup.find(id="-torque-aggregation-function-keyword").find_next()
+        table = soup.find(
+            id="-torque-aggregation-function-keyword").find_next()
         while table.name != "table":
             table = table.find_next()
         td = table.find_all("tr")[3].find_all("td")[1]
