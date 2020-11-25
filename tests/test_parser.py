@@ -7,6 +7,7 @@ import pytest
 
 import cartocss_doc_parser
 
+
 PARAMETRIC = [
     ("symbolizers", 10, False),
     ("values", 9, False),

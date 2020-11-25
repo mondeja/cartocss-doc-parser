@@ -7,7 +7,8 @@ import re
 import sys
 from shutil import rmtree
 
-from setuptools import find_packages, setup, Command
+from setuptools import Command, find_packages, setup
+
 
 URL = "https://github.com/mondeja/cartocss-doc-parser"
 EMAIL = "mondejar1994@gmail.com"

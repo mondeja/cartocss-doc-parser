@@ -5,6 +5,7 @@ import sys
 
 import pytest
 
+
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 ROOT = os.path.abspath(os.path.dirname(TEST_DIR))
 
@@ -14,7 +15,7 @@ sys.path.append(ROOT)
 
 from cartocss_doc_parser import (  # noqa: E402
     get_cartocss_doc_html,
-    get_cartocss_doc_soup,
+    get_cartocss_doc_soup
 )
 
 
