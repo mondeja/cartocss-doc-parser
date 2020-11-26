@@ -23,6 +23,8 @@ LINT_EXTRAS = [
     "flake8==3.8.4",
     "flake8-print==3.1.4",
     "flake8-implicit-str-concat==0.2.0",
+    "isort==5.6.4",
+    "yamllint==1.25.0",
 ]
 TEST_EXTRAS = [
     "pytest==6.1.2",
