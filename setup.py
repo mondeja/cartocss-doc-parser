@@ -22,7 +22,7 @@ REQUIRED = [
 LINT_EXTRAS = [
     "flake8==3.8.4",
     "flake8-print==3.1.4",
-    "flake8-implicit-str-concat==0.1.0",
+    "flake8-implicit-str-concat==0.2.0",
 ]
 TEST_EXTRAS = [
     "pytest==6.1.2",
