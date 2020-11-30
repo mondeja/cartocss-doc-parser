@@ -96,7 +96,7 @@ class UploadCommand(Command):
 setup(
     name=ABOUT["__title__"],
     version=ABOUT["__version__"],
-    description=ABOUT["__version__"],
+    description=ABOUT["__description__"],
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     author=AUTHOR,
