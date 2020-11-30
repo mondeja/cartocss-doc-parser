@@ -1,6 +1,7 @@
 ignore: |
   venv
   build
+  .github
 
 rules:
   braces:
@@ -27,7 +28,6 @@ rules:
   key-ordering:
     ignore: |
       .pre-commit-config.yaml
-      .github
   line-length:
     allow-non-breakable-words: true
     max: 80
