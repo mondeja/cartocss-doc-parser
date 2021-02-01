@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sys
 import types
 
@@ -32,7 +30,8 @@ class TestParser:
     @classmethod
     def setup_class(cls):
         cls.carto_css_data_types = list(
-            cartocss_doc_parser.cartocss_data_types())
+            cartocss_doc_parser.cartocss_data_types(),
+        )
 
     def assert_string(self, value):
         assert isinstance(value, str)
@@ -72,11 +71,13 @@ class TestParser:
         for item in value:
             self.assert_string(item)
 
-    def assert_section_props(self,
-                             _values,
-                             section,
-                             values=5,
-                             properties=False):
+    def assert_section_props(
+        self,
+        _values,
+        section,
+        values=5,
+        properties=False,
+    ):
         assert isinstance(_values, types.GeneratorType)
         sys.stdout.write("\n")
 
@@ -111,14 +112,20 @@ class TestParser:
                     assert "variants" in _value
                     self.assert_variants(_value["variants"])
 
-    def assert_parser(self,
-                      soup,
-                      parser_func,
-                      section,
-                      values=5,
-                      properties=False):
+    def assert_parser(
+        self,
+        soup,
+        parser_func,
+        section,
+        values=5,
+        properties=False,
+    ):
         self.assert_section_props(
-            parser_func(soup), section, values=values, properties=properties)
+            parser_func(soup),
+            section,
+            values=values,
+            properties=properties,
+        )
 
     def test_carto_css_data_types(self):
         for data_type in self.carto_css_data_types:
@@ -131,10 +138,15 @@ class TestParser:
             getattr(cartocss_doc_parser, "parse_%s" % section),
             section,
             values=values,
-            properties=properties)
+            properties=properties,
+        )
 
     def test_cartocss_doc(self):
         docs = cartocss_doc_parser.cartocss_doc()
         for section, values, properties in PARAMETRIC:
             self.assert_section_props(
-                docs[section], section, values=values, properties=properties)
+                docs[section],
+                section,
+                values=values,
+                properties=properties,
+            )

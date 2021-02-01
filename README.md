@@ -125,7 +125,7 @@ All data types can be requested with [cartocss_data_types](#cartocss_data_types)
 Provides information for almost every section of CartoCSS documentation.
 
 - **url** (str) URL to the documentation page. Can be a local file, in which
- case any HTTP request would be performed, instead the file would be read. 
+ case any HTTP request would be performed, instead the file would be read.
 - **user_agent** (str) User agent performing the HTTP request to documentation
  page. As default is `cartocss_doc_parser (v%(version)s)`.
 
@@ -134,7 +134,7 @@ Provides information for almost every section of CartoCSS documentation.
 Lists all available data types for properties for CartoCSS.
 
 - **url** (str) URL to the documentation page. Can be a local file, in which
- case any HTTP request would be performed, instead the file would be read. 
+ case any HTTP request would be performed, instead the file would be read.
 - **user_agent** (str) User agent performing the HTTP request to documentation
  page. As default is `cartocss_doc_parser (v%(version)s)`.
 

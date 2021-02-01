@@ -14,7 +14,7 @@ __module__ = sys.modules[__name__]
 
 CARTOCSS_DOC_URL = "https://carto.com/developers/styling/cartocss/"
 
-DEFAULT_USER_AGENT = "%s v%s" % (__title__, __version__)
+DEFAULT_USER_AGENT = f"{__title__} v{__version__}"
 
 PROP_DETAILS_ATTR_MAP = {
     "Description": "description",
@@ -30,8 +30,11 @@ PARSERS = [
     ("other_parameters", "other-cartocss-parameters", False),
     ("torque_properties", "cartocss---torque-maps", True),
     ("common_elements", "common-elements", True),
-    ("map_background_and_string_elements",
-     "map-background-and-string-elements", True),
+    (
+        "map_background_and_string_elements",
+        "map-background-and-string-elements",
+        True,
+    ),
     ("polygon", "polygon", True),
     ("line", "line", True),
     ("markers", "markers", True),
@@ -60,10 +63,12 @@ def get_cartocss_doc_soup(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
     return BeautifulSoup(markup, "lxml")
 
 
-def _parse_table_links_after_h(soup,
-                               h_id,
-                               url=CARTOCSS_DOC_URL,
-                               properties=False):
+def _parse_table_links_after_h(
+    soup,
+    h_id,
+    url=CARTOCSS_DOC_URL,
+    properties=False,
+):
     h = soup.find(id=h_id)
     table = h.find_next()
     while table.name != "table":
@@ -105,14 +110,17 @@ def _parse_table_links_after_h(soup,
             for prop_td in prop_table.find_all("td"):
                 if _current_prop_detail is None:
                     _current_prop_detail = PROP_DETAILS_ATTR_MAP.get(
-                        prop_td.string, None)
+                        prop_td.string,
+                        None,
+                    )
                 else:
                     if _current_prop_detail == "default":
                         code_container = prop_td.find("code")
 
                         if code_container is None:
                             default = re.search(
-                                r"^([^.,]+)", prop_td.get_text().lower()
+                                r"^([^.,]+)",
+                                prop_td.get_text().lower(),
                             ).group(1)
                             if " (" in default:
                                 default = default.split(" (")[0]
@@ -121,8 +129,7 @@ def _parse_table_links_after_h(soup,
                         # The property `background-image` has next string as
                         # default value, but must be null instead
                         # carto.com/developers/styling/cartocss/#background-image-uri
-                        _invalid_value = \
-                            "this parameter is not applied by default"
+                        _invalid_value = "this parameter is not applied by default"
                         if default == _invalid_value:
                             default = None
                         prop_details[_current_prop_detail] = default
@@ -139,11 +146,13 @@ def _parse_table_links_after_h(soup,
                                 variants = code_containers[0].string.split(",")
                                 for variant in variants:
                                     prop_details[_current_prop_detail].append(
-                                        variant.strip(" "))
+                                        variant.strip(" "),
+                                    )
                             else:
                                 for code_container in code_containers:
                                     prop_details[_current_prop_detail].append(
-                                        code_container.string)
+                                        code_container.string,
+                                    )
                     else:
                         prop_details[_current_prop_detail] = prop_td.get_text()
                     _current_prop_detail = None
@@ -165,7 +174,12 @@ def cartocss_data_types(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
 def _create_parser(func_name, _id, properties):
     def _func(soup, url=CARTOCSS_DOC_URL):
         return _parse_table_links_after_h(
-            soup, _id, url=url, properties=properties)
+            soup,
+            _id,
+            url=url,
+            properties=properties,
+        )
+
     _func.__name__ = func_name
     return _func
 
@@ -173,7 +187,10 @@ def _create_parser(func_name, _id, properties):
 for _attrname, _id, properties in PARSERS:
     _func_name = "parse_%s" % _attrname
     setattr(
-        __module__, _func_name, _create_parser(_func_name, _id, properties))
+        __module__,
+        _func_name,
+        _create_parser(_func_name, _id, properties),
+    )
 
 
 def cartocss_doc(url=CARTOCSS_DOC_URL, user_agent=DEFAULT_USER_AGENT):
