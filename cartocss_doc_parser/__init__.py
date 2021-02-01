@@ -6,10 +6,8 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-__version__ = "0.2.9"
-__version_info__ = tuple([int(i) for i in __version__.split(".")])
+__version__ = "0.2.10"
 __title__ = "cartocss-doc-parser"
-__description__ = "CartoCSS documentation parser."
 __module__ = sys.modules[__name__]
 
 CARTOCSS_DOC_URL = "https://carto.com/developers/styling/cartocss/"
