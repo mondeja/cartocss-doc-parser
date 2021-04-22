@@ -1,7 +1,5 @@
 {
-  extends: [
-    "config:base",
-  ],
+  extends: ["config:base"],
 
   labels: ["dependencies"],
   assignees: ["@mondeja"],
@@ -13,7 +11,7 @@
     {
       matchUpdateTypes: ["patch", "pin", "digest"],
       automerge: true,
-    }
+    },
   ],
 
   // Security vulnerabilities should be fixed ASAP
