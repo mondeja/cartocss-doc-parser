@@ -19,6 +19,7 @@ repos:
     hooks:
       - id: dev-extras-required
   - repo: https://github.com/psf/black
+      - id: root-editorconfig-required
     rev: 20.8b1
     hooks:
       - id: black
