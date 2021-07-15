@@ -15,8 +15,9 @@ repos:
     hooks:
       - id: setup-cfg-fmt
   - repo: https://github.com/mondeja/pre-commit-hooks
-    rev: v1.5.2
+    rev: v1.5.1
     hooks:
+      - id: root-editorconfig-required
       - id: dev-extras-required
   - repo: https://github.com/psf/black
     rev: 21.6b0
@@ -59,3 +60,7 @@ repos:
         args:
           - -config=https://github.com/mondeja/repo-stream-config
           - -updater=py-upstream
+  - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+    rev: 2.3.5
+    hooks:
+      - id: editorconfig-checker
