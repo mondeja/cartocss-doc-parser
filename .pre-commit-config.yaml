@@ -48,7 +48,7 @@ repos:
           - -c
           - .yamllint
   - repo: https://github.com/mondeja/repo-stream
-    rev: v1.1.0
+    rev: v1.2.0
     hooks:
       - id: repo-stream
         name: upstream-updates
