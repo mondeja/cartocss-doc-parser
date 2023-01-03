@@ -4,16 +4,12 @@ repos:
     hooks:
       - id: pyupgrade
         args:
-          - --py36-plus
+          - --py37-plus
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.3.0
     hooks:
       - id: end-of-file-fixer
         name: end-of-file-fixer
-  - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.20.1
-    hooks:
-      - id: setup-cfg-fmt
   - repo: https://github.com/mondeja/pre-commit-hooks
     rev: v1.8.0
     hooks:
@@ -47,19 +43,6 @@ repos:
         args:
           - -c
           - .yamllint
-  - repo: https://github.com/mondeja/repo-stream
-    rev: v1.3.1
-    hooks:
-      - id: repo-stream
-        name: upstream-updates
-        args:
-          - -config=https://github.com/mondeja/repo-stream-config
-          - -updater=upstream
-      - id: repo-stream
-        name: python-stream-updates
-        args:
-          - -config=https://github.com/mondeja/repo-stream-config
-          - -updater=py-upstream
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
     rev: 2.4.0
     hooks:

@@ -141,7 +141,7 @@ Lists all available data types for properties for CartoCSS.
 [pypi-link]: https://pypi.org/project/cartocss-doc-parser
 [pypi-version-image]: https://img.shields.io/pypi/v/cartocss-doc-parser
 [pypi-pyversions-image]: https://img.shields.io/pypi/pyversions/cartocss-doc-parser
-[tests-image]: https://img.shields.io/github/workflow/status/mondeja/cartocss-doc-parser/Test?logo=github&label=tests
+[tests-image]: https://img.shields.io/github/actions/workflow/status/mondeja/cartocss-doc-parser/ci.yml?branch=master&logo=github&label=tests
 [tests-link]: https://github.com/mondeja/cartocss-doc-parser/actions?query=workflow%3ATest
 [coverage-image]: https://coveralls.io/repos/github/mondeja/cartocss-doc-parser/badge.svg
 [coverage-link]: https://coveralls.io/github/mondeja/cartocss-doc-parser

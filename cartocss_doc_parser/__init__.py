@@ -6,7 +6,7 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __title__ = "cartocss-doc-parser"
 __module__ = sys.modules[__name__]
 
